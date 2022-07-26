@@ -20,40 +20,34 @@ public class FilesDir {
             if (file.isFile()) {
 
                 long start = System.currentTimeMillis();
-                switch (getFileExtension(file)) {
-                    case "yaml" -> {
-                        String resConvert = ConverterJSON(dir, file.getName(), dirName);
-                        if (!resConvert.equals("")) {
-                            long finish = System.currentTimeMillis();
-                            long duration = finish - start;
-                            String fileNameNew = file.getName().substring(0, file.getName().indexOf(".")) + ".json";
-                            File fileNew = new File(dirName + "/" + fileNameNew);
+                String fileExtension = getFileExtension(file);
+                if ("yaml".equals(fileExtension)) {
+                    String resConvert = ConverterJSON(dir, file.getName(), dirName);
+                    if (!resConvert.equals("")) {
+                        long finish = System.currentTimeMillis();
+                        long duration = finish - start;
+                        String fileNameNew = file.getName().substring(0, file.getName().indexOf(".")) + ".json";
+                        File fileNew = new File(dirName + "/" + fileNameNew);
 
-                            text.append(file.getName()).append(" -> ").append(fileNameNew).append(" -> ")
-                                    .append(duration).append("s").append(" -> size ").append(file.length())
-                                    .append("kb").append(" -> ").append(fileNew.length()).append("kb").append("\n");
-                        } else {
-                            text.append(file.getName()).append(" -> ").append("file is invalid").append("\n");
-                        }
-
-
+                        text.append(file.getName()).append(" -> ").append(fileNameNew).append(" -> ")
+                                .append(duration).append("s").append(" -> size ").append(file.length())
+                                .append("kb").append(" -> ").append(fileNew.length()).append("kb").append("\n");
+                    } else {
+                        text.append(file.getName()).append(" -> ").append("file is invalid").append("\n");
                     }
-                    case "json" -> {
-                        String resConvert = ConverterYAML(dir, file.getName(), dirName);
-                        if (!resConvert.equals("")) {
-                            long finish = System.currentTimeMillis();
-                            long duration = finish - start;
-                            String fileNameNew = file.getName().substring(0, file.getName().indexOf(".")) + ".yaml";
-                            File fileNew = new File(dirName + "/" + fileNameNew);
+                } else if ("json".equals(fileExtension)) {
+                    String resConvert = ConverterYAML(dir, file.getName(), dirName);
+                    if (!resConvert.equals("")) {
+                        long finish = System.currentTimeMillis();
+                        long duration = finish - start;
+                        String fileNameNew = file.getName().substring(0, file.getName().indexOf(".")) + ".yaml";
+                        File fileNew = new File(dirName + "/" + fileNameNew);
 
-                            text.append(file.getName()).append(" -> ").append(fileNameNew).append(" -> ")
-                                    .append(duration).append("s").append(" -> size ").append(file.length())
-                                    .append("kb").append(" -> ").append(fileNew.length()).append("kb").append("\n");
-                        } else {
-                            text.append(file.getName()).append(" -> ").append("file is invalid").append("\n");
-                        }
-                    }
-                    default -> {
+                        text.append(file.getName()).append(" -> ").append(fileNameNew).append(" -> ")
+                                .append(duration).append("s").append(" -> size ").append(file.length())
+                                .append("kb").append(" -> ").append(fileNew.length()).append("kb").append("\n");
+                    } else {
+                        text.append(file.getName()).append(" -> ").append("file is invalid").append("\n");
                     }
                 }
             }

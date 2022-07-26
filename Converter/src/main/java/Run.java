@@ -7,6 +7,7 @@ public class Run {
             String dir = args[0];
             fd.listFiles(dir);
         } catch (ArrayIndexOutOfBoundsException e) {
+
             String dir = System.getProperty("user.dir");
             fd.listFiles(dir);
         }

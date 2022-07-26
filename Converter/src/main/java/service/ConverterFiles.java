@@ -63,8 +63,7 @@ public class ConverterFiles {
     public static String asYaml(String jsonString) {
         try {
             JsonNode jsonNodeTree = new ObjectMapper().readTree(jsonString);
-            String jsonAsYaml = new YAMLMapper().writeValueAsString(jsonNodeTree);
-            return jsonAsYaml;
+            return new YAMLMapper().writeValueAsString(jsonNodeTree);
         } catch (IOException e) {
             return "";
         }
